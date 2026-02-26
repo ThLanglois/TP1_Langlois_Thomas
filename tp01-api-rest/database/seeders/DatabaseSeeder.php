@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Rental;
+use App\Models\Review;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,5 +24,11 @@ class DatabaseSeeder extends Seeder
             EquipmentSeeder::class,
             EquipmentSportsSeeder::class,
         ]);
+
+        User::factory(20)->create();
+
+        Rental::factory(40)->create();
+
+        Review::factory(60)->create();
     }
 }

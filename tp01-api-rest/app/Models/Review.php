@@ -12,17 +12,17 @@ class Review extends Model
     protected $fillable = [
         'rating',
         'comment',
-        'userId',
-        'rentalId'
+        'user_id',
+        'rental_id'
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'userId');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function rental()
     {
-        return $this->belongsTo('App\Models\Rental', 'rentalId');
+        return $this->belongsTo('App\Models\Rental', 'rental_id');
     }
 }

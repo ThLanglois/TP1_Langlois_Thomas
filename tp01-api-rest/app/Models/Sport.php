@@ -2,24 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Sport extends Model
-{
-    use HasFactory;
-    
+{   
     protected $fillable = [
         'name'
     ];
 
     public function equipment()
     {
+        // IA: Même chose que dans Equipment.php
         return $this->belongsToMany(
-            'App\Models\Equipment', // IA: Même chose que dans Equipment.php
-            'equipmentsports',
-            'sportId',
-            'equipmentId'
+            'App\Models\Equipment', 
+            'equipment_sport',
+            'sport_id',
+            'equipment_id'
         );
     }
 }
