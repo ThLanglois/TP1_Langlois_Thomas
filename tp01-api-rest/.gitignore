@@ -22,6 +22,6 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
-./create_branch.bat
-./push.bat
-./TP1
+create_branch.bat
+push.bat
+/TP1
