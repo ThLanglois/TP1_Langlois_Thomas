@@ -17,10 +17,10 @@ return new class extends Migration
 
             $table->string('name', 50);
             $table->text('description');
-            $table->decimal('dailyPrice', 10);
-            $table->unsignedBigInteger('categoryId');
+            $table->decimal('daily_price', 10);
+            $table->unsignedBigInteger('category_id');
 
-            $table->foreign('categoryId')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

@@ -11,20 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rentals', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->decimal('total_price', 10);
-            $table->unsignedBigInteger('user_id');
+        Schema::create('equipment_sport', function (Blueprint $table) {
+            $table->unsignedBigInteger('sport_id');
             $table->unsignedBigInteger('equipment_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->primary(['sport_id', 'equipment_id']); // https://laravel.com/docs/12.x/migrations
+
+            $table->foreign('sport_id')->references('id')->on('sports');
 
             $table->foreign('equipment_id')->references('id')->on('equipment');
-        });
+            $table->timestamps();
+        }); 
     }
 
     /**
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rentals');
+        Schema::dropIfExists('equipment_sport');
     }
 };

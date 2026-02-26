@@ -10,25 +10,25 @@ class Rental extends Model
     use HasFactory;
     
     protected $fillable = [
-        'startDate',
-        'endDate',
-        'totalPrice',
-        'userId',
-        'equipmentId'
+        'start_date',
+        'end_date',
+        'total_price',
+        'user_id',
+        'equipment_id'
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'userId');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     public function equipment()
     {
-        return $this->belongsTo('App\Models\Equipment', 'equipmentId');
+        return $this->belongsTo('App\Models\Equipment', 'equipment_id');
     }
 
     public function reviews()
     {
-        return $this->hasMany('App\Models\Review', 'rentalId');
+        return $this->hasMany('App\Models\Review', 'rental_id');
     }
 }

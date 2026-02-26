@@ -5,24 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'firstName',
-        'lastName',
+        'first_name',
+        'last_name',
         'email',
         'phone'
     ];
 
     public function rentals()
     {
-        return $this->hasMany('App\Models\Rental');
+        return $this->hasMany('App\Models\Rental', 'user_id');
     }
 
     public function reviews()
     {
-        return $this->hasMany('App\Models\Review');
+        return $this->hasMany('App\Models\Review', 'user_id');
     }
 }
