@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Pour les seeders, je ne trouvais plus les notes de cours qui donnaient le code j'ai donc demandé à ChatGPT: Quel est le code pour inclure des fichiers SQL dans un seeder et les lancer dans le DatabaseSeeder avec Laravel?
+        $this->call([
+            CategoriesSeeder::class,
+            SportsSeeder::class,
+            EquipmentSeeder::class,
+            EquipmentSportsSeeder::class,
         ]);
     }
 }
