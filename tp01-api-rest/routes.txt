@@ -1,0 +1,93 @@
+1.
+GET: http://127.0.0.1:8000/api/equipment
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Vélo de montagne",
+            "description": "Vélo tout-terrain",
+            "daily_price": 35,
+            "category_id": 4
+        },
+        {
+            "id": 2,
+            "name": "Casque de vélo",
+            "description": "Casque de protection homologué",
+            "daily_price": 5,
+            "category_id": 3
+        },
+        {
+            "id": 3,
+            "name": "Skis alpins",
+            "description": "Skis pour piste",
+            "daily_price": 40,
+            "category_id": 1
+        },
+        {
+            "id": 4,
+            "name": "Raquettes de tennis",
+            "description": "Raquette en graphite",
+            "daily_price": 12,
+            "category_id": 1
+        },
+        {
+            "id": 5,
+            "name": "Sac de randonnée",
+            "description": "Sac 40L",
+            "daily_price": 8,
+            "category_id": 2
+        }
+    ]
+}
+
+2.
+GET: http://127.0.0.1:8000/api/equipment/1
+{
+    "data": {
+        "id": 1,
+        "name": "Vélo de montagne",
+        "description": "Vélo tout-terrain",
+        "daily_price": 35,
+        "category_id": 4
+    }
+}
+
+3.
+GET: http://127.0.0.1:8000/api/equipment/1/popularity
+{
+    "popularity": 5.866666666666666
+}
+
+4.
+GET: http://127.0.0.1:8000/api/equipment/1/average-rental-price?minDate=2026-01-01&maxDate=2026-02-01
+{
+    "avg_total_price": 184.2475
+}
+
+5.
+POST: http://127.0.0.1:8000/api/users
+{
+    "data": {
+        "id": 21,
+        "first_name": "Thomas",
+        "last_name": "Langlois",
+        "email": "blbaa@gmail,com",
+        "phone": "4818389230"
+    }
+}
+
+6.
+PUT: http://127.0.0.1:8000/api/users/1
+{
+    "data": {
+        "id": 1,
+        "first_name": "Thomas",
+        "last_name": "Langlois",
+        "email": "blbaa@hotmail.com",
+        "phone": "4818389230"
+    }
+}
+
+7.
+DELETE: http://127.0.0.1:8000/api/reviews/1
+Vide (204 No Content)
