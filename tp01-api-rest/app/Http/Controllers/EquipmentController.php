@@ -8,9 +8,21 @@ use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
 
 class EquipmentController extends Controller
 {
+    #[OA\Get(
+        path: "/api/equipment",
+        summary: "Recevoir l'information de tous les équipements",
+        tags: ["Equipment"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Liste des équipements"
+            )
+        ]
+    )]
     public function index()
     {
         try
@@ -23,6 +35,24 @@ class EquipmentController extends Controller
         }
     }
 
+    #[OA\Get(
+        path: "/api/equipment/{id}",
+        summary: "Recevoir l'information d'un équipement en particulier",
+        tags: ["Equipment"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "ID de l'équipement",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer", example: 1)
+            )
+        ],
+        responses: [
+            new OA\Response(response: 200, description: "Équipement trouvé"),
+            new OA\Response(response: 404, description: "Équipement non trouvé")
+        ]
+    )]
     public function show(string $id)
     {
         try
@@ -39,6 +69,27 @@ class EquipmentController extends Controller
         }
     }
 
+    #[OA\Get(
+        path: "/api/equipment/{id}/popularity",
+        summary: "Recevoir l'indice de popularité d'un équipement",
+        tags: ["Equipment"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "ID de l'équipement",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer", example: 1)
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Indice de popularité calculé"
+            ),
+            new OA\Response(response: 404, description: "Équipement non trouvé")
+        ]
+    )]
     public function popularity(string $id)
     {
         try
@@ -70,6 +121,39 @@ class EquipmentController extends Controller
         }
     }   
 
+    #[OA\Get(
+        path: "/api/equipment/{id}/average-rental-price",
+        summary: "Recevoir le prix moyen de location d'un équipement",
+        tags: ["Equipment"],
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "ID de l'équipement",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer", example: 1)
+            ),
+            new OA\Parameter(
+                name: "minDate",
+                description: "Date minimale incluse (YYYY-MM-DD)",
+                in: "query",
+                required: false,
+                schema: new OA\Schema(type: "string", format: "date", example: "2026-01-01")
+            ),
+            new OA\Parameter(
+                name: "maxDate",
+                description: "Date maximale incluse (YYYY-MM-DD)",
+                in: "query",
+                required: false,
+                schema: new OA\Schema(type: "string", format: "date", example: "2026-01-31")
+            )
+        ],
+        responses: [
+            new OA\Response(response: 200, description: "Prix moyen calculé"),
+            new OA\Response(response: 404, description: "Équipement non trouvé"),
+            new OA\Response(response: 422, description: "Paramètres invalides")
+        ]
+    )]
     public function averageRentalPrice(Request $request, string $id)
     {
         try

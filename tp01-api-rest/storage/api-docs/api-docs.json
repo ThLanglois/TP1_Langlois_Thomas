@@ -1,0 +1,295 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API TP1 - Location d'équipements",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/equipment": {
+            "get": {
+                "tags": [
+                    "Equipment"
+                ],
+                "summary": "Recevoir l'information de tous les équipements",
+                "operationId": "771e58f407e40ca413f92c85f944e760",
+                "responses": {
+                    "200": {
+                        "description": "Liste des équipements"
+                    }
+                }
+            }
+        },
+        "/api/equipment/{id}": {
+            "get": {
+                "tags": [
+                    "Equipment"
+                ],
+                "summary": "Recevoir l'information d'un équipement en particulier",
+                "operationId": "546d2e88aec2a0d7af708399e7e20a1e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'équipement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Équipement trouvé"
+                    },
+                    "404": {
+                        "description": "Équipement non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/equipment/{id}/popularity": {
+            "get": {
+                "tags": [
+                    "Equipment"
+                ],
+                "summary": "Recevoir l'indice de popularité d'un équipement",
+                "operationId": "f073a07513b9a2e31ca3067c2dccd504",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'équipement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Indice de popularité calculé"
+                    },
+                    "404": {
+                        "description": "Équipement non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/equipment/{id}/average-rental-price": {
+            "get": {
+                "tags": [
+                    "Equipment"
+                ],
+                "summary": "Recevoir le prix moyen de location d'un équipement",
+                "operationId": "daa3c2c1708c4ef4421603a05c825575",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'équipement",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "minDate",
+                        "in": "query",
+                        "description": "Date minimale incluse (YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2026-01-01"
+                        }
+                    },
+                    {
+                        "name": "maxDate",
+                        "in": "query",
+                        "description": "Date maximale incluse (YYYY-MM-DD)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2026-01-31"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Prix moyen calculé"
+                    },
+                    "404": {
+                        "description": "Équipement non trouvé"
+                    },
+                    "422": {
+                        "description": "Paramètres invalides"
+                    }
+                }
+            }
+        },
+        "/api/reviews/{id}": {
+            "delete": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Supprimer une critique",
+                "operationId": "89986343b5dbd2b909c2764aeb7e4096",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la critique",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Critique supprimée"
+                    },
+                    "404": {
+                        "description": "Critique non trouvée"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer un utilisateur",
+                "operationId": "592819a0265360b2014512d6dbfaf0e7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Thomas"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Langlois"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "thomas@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "4181234567"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé"
+                    },
+                    "422": {
+                        "description": "Données invalides"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Mettre à jour un utilisateur",
+                "operationId": "b9091397c8b25f12c6adb74be6ce3a5a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Thomas"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Langlois"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "thomas@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "4181234567"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur mis à jour"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    },
+                    "422": {
+                        "description": "Données invalides"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Equipment",
+            "description": "Equipment"
+        },
+        {
+            "name": "Reviews",
+            "description": "Reviews"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}
